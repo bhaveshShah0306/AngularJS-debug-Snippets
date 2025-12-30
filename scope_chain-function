@@ -1,0 +1,35 @@
+window.printScopeChain = function (el) {
+    if (!window.angular) {
+        console.warn('AngularJS not found on window');
+        return;
+    }
+
+    var scope = angular.element(el).scope();
+    if (!scope) {
+        console.warn('No scope attached to element', el);
+        return;
+    }
+
+    var level = 0;
+
+    console.group('AngularJS Scope Chain');
+    while (scope) {
+        console.group(
+            'Level ' + level +
+            (scope.$id ? ' (scope#$id=' + scope.$id + ')' : '')
+        );
+
+        Object.keys(scope)
+            .filter(k => !k.startsWith('$'))
+            .sort()
+            .forEach(k => {
+                console.log(k, '→', scope[k]);
+            });
+
+        console.groupEnd();
+        scope = scope.$parent;
+        level++;
+    }
+    console.groupEnd();
+};
+printScopeChain($0); // select the element for which you seek the scope chain hierarchy.
