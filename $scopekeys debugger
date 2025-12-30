@@ -1,0 +1,6 @@
+        debugger;
+
+        var scopeKeys = Object.keys($scope)
+            .filter(k => !k.startsWith('$'));
+
+        console.log(scopeKeys);
