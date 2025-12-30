@@ -3,7 +3,7 @@ window.printScopeChain = function (el) {
         console.warn('AngularJS not found on window');
         return;
     }
-
+//
     var scope = angular.element(el).scope();
     if (!scope) {
         console.warn('No scope attached to element', el);
